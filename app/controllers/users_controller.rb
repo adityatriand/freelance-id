@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
-  # GET /users or /users.json
+  # GET /users for html format 
+  # GET /users.json for json format
   def index
     @users = User.all
   end
 
-  # GET /users/1 or /users/1.json
+  # GET /users/:id html format
+  # GET /users/:id.json for json format
   def show
   end
 
@@ -15,11 +17,12 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  # GET /users/1/edit
+  # GET /users/:id/edit
   def edit
   end
 
-  # POST /users or /users.json
+  # POST /users for html format
+  # POST /users.json for json format
   def create
     @user = User.new(user_params)
 
@@ -34,7 +37,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1 or /users/1.json
+  # PATCH/PUT /users/:id for html format
+  # PATCH/PUT /users/:id.json for json format
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -47,7 +51,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1 or /users/1.json
+  # DELETE /users/:id for html format
+  # DELETE /users/:id.json for json format
   def destroy
     @user.destroy
 
@@ -60,7 +65,13 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by_id(params[:id])
+      if !@user
+        respond_to do |format|
+            format.html { render :file => "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }
+            format.json { render json: { error: 'User not found' }, status: :not_found }
+        end
+      end
     end
 
     # Only allow a list of trusted parameters through.
