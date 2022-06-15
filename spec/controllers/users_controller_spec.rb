@@ -138,5 +138,23 @@ RSpec.describe UsersController do
       end
     end
   end
+  
+  describe 'DELETE #destroy' do
+    before :each do
+      @user = create(:user)
+    end
+
+    it "deletes the user from the database" do
+      expect{
+        delete :destroy, params: { id: @user }
+      }.to change(User, :count).by(-1)
+      expect(response).to have_http_status(:found)
+    end
+
+    it "redirects to users#index" do
+      delete :destroy, params: { id: @user }
+      expect(response).to redirect_to users_url
+    end
+  end
 
 end
