@@ -100,4 +100,43 @@ RSpec.describe UsersController do
     end
   end
 
+  describe 'PATCH #update' do
+    before :each do
+      @user = create(:user)
+    end
+
+    context "with valid attributes" do
+      it "locates the requested @user" do
+        patch :update, params: { id: @user, user: attributes_for(:user) }
+        expect(assigns(:user)).to eq @user
+      end
+
+      it "changes @user's attributes" do
+        patch :update, params: { id: @user, user: attributes_for(:user, role: 2) }
+        @user.reload
+        expect(response).to have_http_status(:found)
+        expect(@user.role).to eq(2)
+      end
+
+      it "redirects to the user" do
+        patch :update, params: { id: @user, user: attributes_for(:user) }
+        expect(response).to redirect_to @user
+      end
+    end
+
+    context "with invalid attributes" do
+      it "does not update the user in the database" do
+        expect{
+          patch :update, params: { id: @user, user: attributes_for(:invalid_user) }
+        }.not_to change(User, :count)
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it "re-renders the :edit template" do
+        patch :update, params: { id: @user, user: attributes_for(:invalid_user) }
+        expect(response).to render_template :edit
+      end
+    end
+  end
+
 end
