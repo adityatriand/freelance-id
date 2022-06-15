@@ -48,4 +48,25 @@ RSpec.describe User, type: :model do
 
   end
 
+  context 'validation for role field' do
+    it 'is invalid without role' do
+      user.role = nil
+      user.valid?
+      expect(user.errors[:role]).to include("can't be blank")
+    end
+
+    it 'is invalid if role filled with not numeric number' do
+      user.role = "10s"
+      user.valid?
+      expect(user.errors[:role]).to include("is not a number")
+    end
+
+    it 'is invalid if role filled out of 0..2' do
+      user.role = 3
+      user.valid?
+      expect(user.errors[:role]).to include("must be in 0..2")
+    end
+
+  end
+
 end
