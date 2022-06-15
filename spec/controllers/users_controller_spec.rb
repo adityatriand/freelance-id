@@ -60,4 +60,44 @@ RSpec.describe UsersController do
     end
   end
 
+  describe 'POST #create' do
+    context "with valid attributes" do
+      it "saves the new user in the database" do
+        expect{
+          post :create, params: { user: attributes_for(:user) }
+        }.to change(User, :count).by(1)
+      end
+
+      it "redirects to users#show" do
+        post :create, params: { user: attributes_for(:user) }
+        expect(response).to redirect_to(user_path(assigns[:user]))
+      end
+
+      it "give response created if create success" do
+        post :create, params: { user: attributes_for(:user) }
+        expect(response).to have_http_status(:found)
+      end
+
+    end
+
+    context "with invalid attributes" do
+      it "does not save the new user in the database" do
+        expect{
+          post :create, params: { user: attributes_for(:invalid_user) }
+        }.not_to change(User, :count)
+      end
+
+      it "re-renders the :new template" do
+        post :create, params: { user: attributes_for(:invalid_user) }
+        expect(response).to render_template :new
+      end
+
+      it "give response bad request if create failed" do
+        post :create, params: { user: attributes_for(:invalid_user) }
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+    end
+  end
+
 end
