@@ -33,4 +33,19 @@ RSpec.describe User, type: :model do
 
   end
 
+  context 'validation for password field' do
+    it 'is invalid without password' do
+      user.password = nil
+      user.valid?
+      expect(user.errors[:password]).to include("can't be blank")
+    end 
+
+    it 'is invalid if password less than 8 characrter' do
+      user.password = "12345"
+      user.valid?
+      expect(user.errors[:password]).to include("is too short (minimum is 8 characters)")
+    end
+
+  end
+
 end
