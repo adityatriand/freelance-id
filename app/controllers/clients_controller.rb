@@ -1,12 +1,14 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[ show edit update destroy ]
 
-  # GET /clients or /clients.json
+  # GET /clients for html format
+  # GET /clients.json for json format
   def index
     @clients = Client.all
   end
 
-  # GET /clients/1 or /clients/1.json
+  # GET /clients/:id for html format
+  # GET /clients/:id.json for json format
   def show
   end
 
@@ -19,7 +21,8 @@ class ClientsController < ApplicationController
   def edit
   end
 
-  # POST /clients or /clients.json
+  # POST /clients for html format
+  # POST /clients.json for json format
   def create
     @client = Client.new(client_params)
 
@@ -34,7 +37,8 @@ class ClientsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /clients/1 or /clients/1.json
+  # PATCH/PUT /clients/:id for html format
+  # PATCH/PUT /clients/:id.json for json format
   def update
     respond_to do |format|
       if @client.update(client_params)
@@ -47,7 +51,8 @@ class ClientsController < ApplicationController
     end
   end
 
-  # DELETE /clients/1 or /clients/1.json
+  # DELETE /clients/:id for html format
+  # DELETE /clients/:id.json for json format
   def destroy
     @client.destroy
 
@@ -60,7 +65,13 @@ class ClientsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
-      @client = Client.find(params[:id])
+      @client = Client.find_by_id(params[:id])
+      if !@client
+        respond_to do |format|
+            format.html { render :file => "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }
+            format.json { render json: { error: 'client not found' }, status: :not_found }
+        end
+      end
     end
 
     # Only allow a list of trusted parameters through.
