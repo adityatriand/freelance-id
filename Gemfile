@@ -47,8 +47,6 @@ gem "bootsnap", require: false
 
 gem "ffi"
 
-gem 'simplecov', require: false, group: :test
-
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -73,6 +71,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'simplecov', require: false
 end
 
 group :development, :test do
