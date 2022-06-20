@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  post '/register'  => "users#create"
+
+  post '/login' => "auth#login"
+
+  delete '/logout/:id' => "auth#logout"
+
   resources :freelancers
   resources :clients
   resources :users
