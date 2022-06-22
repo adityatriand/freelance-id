@@ -7,4 +7,7 @@ class Freelancer < ApplicationRecord
   validates :category_work, presence: true
   validates :user_id, presence: true
   validates :phone, numericality: true, length: { minimum: 10, maximum: 15 }, uniqueness: true
+
+
+  #ini perubahan
 end
