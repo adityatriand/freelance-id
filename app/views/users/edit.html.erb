@@ -1,10 +1,38 @@
-<h1>Editing user</h1>
-
-<%= render "form", user: @user %>
-
-<br>
-
-<div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
+<% content_for :title, "Change Password" %>
+<div class="container mt-5 mb-5">
+  <h1>Create New Password</h1>
+  <div class="mt-5 mb-5">
+    <%= form_with(model: @user) do |form| %>
+      <% if @user.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+          <ul>
+            <% @user.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="mb-3">
+        <%= form.label :email, {class: "form-label"} %>
+        <%= form.email_field :email, {class: "form-control", readonly: true} %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :password, 'New Password', {class: "form-label"} %>
+        <%= form.password_field :password, {class: "form-control"} %>
+      </div>
+      <div>
+        <%= form.label :role, {class: "form-label"}, style: 'display: block;' %>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :role, 1, {class: "form-check-input", disabled: 'disabled'} %>
+          <%= form.label :role_1, 'Freelancer', {class: "form-check-label"} %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :role, 2, {class: "form-check-input", disabled: 'disabled'} %>
+          <%= form.label :role_2, 'Client', {class: "form-check-label"} %>
+        </div>
+      </div>
+      <%= form.submit class: 'btn btn-custom mt-3' %>
+    <% end %>
+  </div>
 </div>

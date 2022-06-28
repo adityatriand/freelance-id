@@ -1,14 +1,27 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Clients</h1>
-
-<div id="clients">
-  <% @clients.each do |client| %>
-    <%= render client %>
-    <p>
-      <%= link_to "Show this client", client %>
-    </p>
-  <% end %>
+<% content_for :title, "List Clients" %>
+<div class="container mt-5 mb-5">
+  <p style="color: green"><%= notice %></p>
+  <h1 class="title-cus">Our Clients</h1>
+  <%= link_to "Back To Home", home_path, {class: 'btn btn-secondary mt-5'} %>
+  <div id="clients">
+    <% @clients.each do |client| %>
+      <%= render client %>
+      <div class="d-flex mt-5">
+        <%= link_to "See Job Offer", "javascript:void(0)", {class: 'btn btn-custom me-3', "data-bs-toggle": "modal", "data-bs-target": "#exampleModal"} %>
+      </div>
+    <% end %>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-warning">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Warning !</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          This feature is not yet available. Please use other features
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New client", new_client_path %>

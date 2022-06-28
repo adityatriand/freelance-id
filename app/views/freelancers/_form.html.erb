@@ -1,42 +1,43 @@
-<%= form_with(model: freelancer) do |form| %>
-  <% if freelancer.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(freelancer.errors.count, "error") %> prohibited this freelancer from being saved:</h2>
-
-      <ul>
-        <% freelancer.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="mt-5 mb-5">
+  <%= form_with(model: freelancer) do |form| %>
+    <% if freelancer.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(freelancer.errors.count, "error") %> prohibited this freelancer from being saved:</h2>
+        <ul>
+          <% freelancer.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="mb-3">
+      <%= form.label :name, {class: "form-label"} %>
+      <%= form.text_field :name, {class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :phone, {class: "form-label"} %>
+      <%= form.text_field :phone, {class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :date_birth, {class: "form-label"} %>
+      <%= form.date_field :date_birth, {class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :category_work, {class: "form-label"} %>
+      <%= form.select(:category_work, [
+        ['Choose your category work',nil],
+        ['Online Business & Marketing','Online Business & Marketing'],
+        ['Branding Design & Identity','Branding Design & Identity'],
+        ['Data entry','Data entry'],
+        ['Translator','Translator'],
+        ['Mobile Application Development','Mobile Application Development'],
+        ['Writer','Writer'],
+        ['Photography & Videography','Photography & Videography'],
+        ['Website & Development','Website & Development']
+      ], {selected: freelancer.category_work},  {class: "form-control"}) %>
+    </div>
+    <div class="mt-5">
+      <%= form.submit class: 'btn btn-custom' %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div>
-    <%= form.label :date_birth, style: "display: block" %>
-    <%= form.date_field :date_birth %>
-  </div>
-
-  <div>
-    <%= form.label :category_work, style: "display: block" %>
-    <%= form.text_field :category_work %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

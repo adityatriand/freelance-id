@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @client %>
-
-<div>
-  <%= link_to "Edit this client", edit_client_path(@client) %> |
-  <%= link_to "Back to clients", clients_path %>
-
-  <%= button_to "Destroy this client", @client, method: :delete %>
+<% content_for :title, "Info Profile" %>
+<div class="container mt-5">
+  <p style="color: green"><%= notice %></p>
+  <h2 class="title-cus mt-sm-5">Your Profile</h2>
+  <%= render @client %>
+  <div class="d-flex mt-5">
+    <%= link_to "Back To Home", home_path, {class: "btn btn-primary me-3"} %>
+    <%= link_to "Edit Profile", edit_client_path(@client), {class: "btn btn-secondary me-3"} %>
+    <%= link_to "Info Account", "/users/#{current_user.user_id}", {class: "btn btn-custom"} %>
+  </div>
 </div>
