@@ -1,0 +1,97 @@
+<% content_for :title, "Home" %>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <img class="nav-img hover-zoom-effect" src="<%= image_url('logo-freelance-id.png') %>" height="77" alt="logo-freelance-id">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto">
+          <a class="nav-item nav-link" href="/login">SIGN IN</a>
+          <a class="nav-item nav-link" id="button-cus" href="/register">SIGN UP</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<main class="container">
+  <article class="mt-3">
+    <div class="row justify-content-center mt-sm-5">
+      <p class="text-center" style="color: green"><%= notice %></p>
+      <div class="col-sm-5">
+        <h1 class="title-cus">Freelance ID</h1>
+        <p class="aboutus-text">Freelance.id is a digital solution that focuses on people in Indonesia who have not found work. Freelance.id is a website-based application that carries concepts such as displaying a list of freelancer names, job categories and portfolios, then job seekers or what we call clients, if interested in the freelancer, client can contact him directly. </p>
+      </div>
+      <div class="col-sm-7 ps-4 ps-clear">
+        <img class="img-hp hover-zoom-effect" src="<%= image_url('work-img.png') %>" alt="work-img" width="580">
+      </div>
+    </div>
+  </article>
+  <article class="mt-3">
+    <h2 class="title-cus mt-sm-5 text-center">Our Feature</h2>
+    <div class="row justify-content-center mt-sm-5">
+      <div class="col-sm-5 m-2 text-center" data-aos="zoom-in" data-aos-duration="1000">
+        <div class="card-program shadow hover-zoom-effect">
+          <h5 class="text-button mb-sm-5">Clients</h5>
+          <img src="<%= image_url('client.png') %>" alt="client" width="155">
+          <p class="mt-sm-4 mb-sm-3">The clients are who is in need of a worker or freelancer</p>
+          <a class="text-button" href="/clients">See All Our Client</a>
+        </div>
+      </div>
+      <div class="col-sm-5 m-2 text-center" data-aos="zoom-in" data-aos-duration="1000">
+        <div class="card-program shadow hover-zoom-effect">
+          <h5 class="text-button mb-sm-5">Freelancers</h5>
+          <img src="<%= image_url('freelancer.png') %>" alt="freelancer" width="90">
+          <p class="mt-sm-3 mb-sm-3">Freelancer is a worker who is looking for a job</p>
+          <a class="text-button" href="/freelancers">See All Our Freelancer</a>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-12"><img class="img-hp hover-zoom-effect" src="<%= image_url('logo-freelance-id.png') %>" alt="logo-freelances" width="80"></div>
+          <div class="col-sm-12 mt-5">&copy; <script>
+              document.write(new Date().getFullYear());
+            </script> | All Rights Reserved</div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row justify-content-center">
+          <div class="col-sm-12">
+            <h5>Intorduce Our Team</h5>
+          </div>
+          <div class="col-sm-12 text-center">
+            <div class="row justify-content-center">
+              <div class="col-sm-6">
+                <div class="card-profile">
+                  <a class="profile-button" href="https://github.com/adityatriand" target="_blank">Aditya | KM_G2BE1013</a>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="card-profile">
+                  <a class="profile-button" href="https://github.com/shellaarp13" target="_blank">Shella | KM_G2BE2014</a>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="card-profile">
+                  <a class="profile-button" href="https://github.com/vaniailca" target="_blank">Vania | KM_G2BE2174</a>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="card-profile">
+                  <a class="profile-button" href="https://github.com/ClintonLimbong" target="_blank">Limbong | KM_G2BE4152</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

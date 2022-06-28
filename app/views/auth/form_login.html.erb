@@ -1,0 +1,25 @@
+<% content_for :title, "Login" %>
+<div class="container mt-5 mb-5">
+  <h1 class="mb-5">Login Account</h1>
+  <% if notice %>
+    <p><%= notice %></p>
+  <% end %>
+  <!-- menampilkan pesan alert -->
+  <% if alert %>
+    <p style="color: red;" ><%= alert %></p>
+  <% end %>
+  <!-- menampilkan form login -->
+  <%= form_tag controller: :auth, action: :login, local: true do %>
+    <div class="mb-3">
+      <%= label_tag :email, "Your Email", {class: "form-label"} %>
+      <%= email_field_tag :email, '', {class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <%= label_tag :password, "Your Password", {class: "form-label"} %>
+      <%= password_field_tag :password, '', {class: "form-control"} %> <br>
+    </div>
+    <%= submit_tag 'Login', {class: 'btn btn-custom'} %>
+    <%= link_to 'Back to Home', home_path, {class: 'btn btn-secondary'} %>
+    <p class="mt-5">Not registered yet? <%= link_to 'Register Here', register_path %></p>
+  <% end %>
+</div>
