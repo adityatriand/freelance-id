@@ -1,27 +1,12 @@
 <div id="<%= dom_id client %>">
-  <p>
-    <strong>Name:</strong>
-    <%= client.name %>
-  </p>
-
-  <p>
-    <strong>Phone:</strong>
-    <%= client.phone %>
-  </p>
-
-  <p>
-    <strong>Date birth:</strong>
-    <%= client.date_birth %>
-  </p>
-
-  <p>
-    <strong>Type industry:</strong>
-    <%= client.type_industry %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= client.user_id %>
-  </p>
-
+  <div class="row justify-content-center mt-sm-5">
+    <div class="col-sm-12">
+      <div class="card-client hover-zoom-effect">
+        <p>Name: <%= client.name %></p>
+        <p>Phone: <%= client.phone %></p>
+        <p>Date birth: <%= client.date_birth %></p>
+        <p>Type Industry: <%= client.type_industry %></p>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,9 +1,7 @@
-<h1>New user</h1>
-
-<%= render "form", user: @user %>
-
-<br>
-
-<div>
-  <%= link_to "Back to users", users_path %>
+<% content_for :title, "Register" %>
+<div class="container mt-5 mb-5">
+  <h1>Register New Account</h1>
+  <%= render "form", user: @user %>
+  <p class="mt-5">Already have account? <%= link_to 'Login Here', form_login_path %></p>
+  <%= link_to "Back to home", home_path, {class: "btn btn-secondary"} %>
 </div>

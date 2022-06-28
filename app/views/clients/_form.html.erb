@@ -1,42 +1,43 @@
-<%= form_with(model: client) do |form| %>
-  <% if client.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
-
-      <ul>
-        <% client.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="mt-5 mb-5">
+  <%= form_with(model: client) do |form| %>
+    <% if client.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
+        <ul>
+          <% client.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="mb-3">
+      <%= form.label :name, {class: "form-label"} %>
+      <%= form.text_field :name, {class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :phone, {class: "form-label"} %>
+      <%= form.text_field :phone, {class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :date_birth, {class: "form-label"} %>
+      <%= form.date_field :date_birth, {class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :type_industry, {class: "form-label"} %>
+      <%= form.select(:type_industry, [
+        ['Choose your type industry',nil],
+        ['Financial Accounting','Financial Accounting'],
+        ['Entertainment & Arts','Entertainment & Arts'],
+        ['Wedding Service','Wedding Service'],
+        ['Photography','Photography'],
+        ['Technology','Technology'],
+        ['Restaurant','Restaurant'],
+        ['Education','Education'],
+        ['Other','Other']
+      ], {selected: client.type_industry},  {class: "form-control"}) %>
+    </div>
+    <div class="mt-5">
+      <%= form.submit class: 'btn btn-custom' %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div>
-    <%= form.label :date_birth, style: "display: block" %>
-    <%= form.date_field :date_birth %>
-  </div>
-
-  <div>
-    <%= form.label :type_industry, style: "display: block" %>
-    <%= form.text_field :type_industry %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

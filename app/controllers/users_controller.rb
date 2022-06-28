@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action only: %i[ show edit update destroy ] do
+    user_signed_in?
+    check_access?(params[:id].to_i, current_user.user_id)
+  end
+
+  helper_method :current_user
 
   # GET /users for html format 
   # GET /users.json for json format
@@ -28,7 +34,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+        format.html { redirect_to home_url, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +48,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
+        format.html { redirect_to user_url(@user), notice: "Your password has been changed" }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,9 +61,11 @@ class UsersController < ApplicationController
   # DELETE /users/:id.json for json format
   def destroy
     @user.destroy
+    session[:user_id] = nil
+    session[:role] = nil
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      format.html { redirect_to home_path, notice: "User was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -67,10 +75,7 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find_by_id(params[:id])
       if !@user
-        respond_to do |format|
-            format.html { render :file => "#{Rails.root}/public/404.html", :layout => false, :status => :not_found }
-            format.json { render json: { error: 'User not found' }, status: :not_found }
-        end
+        not_found
       end
     end
 

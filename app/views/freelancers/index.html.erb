@@ -1,14 +1,14 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Freelancers</h1>
-
-<div id="freelancers">
-  <% @freelancers.each do |freelancer| %>
-    <%= render freelancer %>
-    <p>
-      <%= link_to "Show this freelancer", freelancer %>
-    </p>
-  <% end %>
+<% content_for :title, "List Freelancers" %>
+<div class="container mt-5 mb-5">
+  <p style="color: green"><%= notice %></p>
+  <h1 class="title-cus">Our Freelancers</h1>
+  <%= link_to "Back To Home", home_path, {class: 'btn btn-secondary mt-5'} %>
+  <div id="freelancers">
+    <% @freelancers.each do |freelancer| %>
+      <%= render freelancer %>
+      <div class="d-flex mt-5">
+        <%= link_to "See Portofolio", "/portofolios?id_user=#{freelancer.user_id}", {class: 'btn btn-custom me-3'} %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New freelancer", new_freelancer_path %>
