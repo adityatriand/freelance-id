@@ -1,35 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe UsersController do
-  describe 'GET #index' do
-    it "populates an array of all users" do 
-        user1 = create(:user, email: "tes@gmail.com")
-        user2 = create(:user, email: "tes1@gmail.com")
-        get :index
-        expect(assigns(:users)).to match_array([user1, user2])
-    end
-
-    it "renders the :index template" do
-        get :index
-        expect(response).to render_template :index
-    end
+  before :each do
+    @user = User.create(email: 'tes@gmail.com', password: '12345678', role: 1)
+    @freelancer = FactoryBot.create(:freelancer, user: @user)
+    allow(controller).to receive(:current_user) { @freelancer }
   end
 
   describe 'GET #show' do
     it "assigns the requested user to @user" do
-      user = create(:user)
-      get :show, params: { id: user }
-      expect(assigns(:user)).to eq user
+      get :show, params: { id: @user }
+      expect(assigns(:user)).to eq @user
     end
 
     it "renders the :show template" do
-      user = create(:user)
-      get :show, params: { id: user }
+      get :show, params: { id: @user }
       expect(response).to render_template :show
     end
 
     it "renders the not found page if request failed to load" do
-        get :show, params: {id: 1}
+        get :show, params: {id: 10}
         expect(response).to have_http_status(:not_found)
     end
   end
@@ -48,14 +38,12 @@ RSpec.describe UsersController do
 
   describe 'GET #edit' do
     it "assigns the requested user to @user" do
-      user = create(:user)
-      get :edit, params: { id: user }
-      expect(assigns(:user)).to eq user
+      get :edit, params: { id: @user }
+      expect(assigns(:user)).to eq @user
     end
 
     it "renders the :edit template" do
-      user = create(:user)
-      get :edit, params: { id: user }
+      get :edit, params: { id: @user }
       expect(response).to render_template :edit
     end
   end
@@ -68,9 +56,9 @@ RSpec.describe UsersController do
         }.to change(User, :count).by(1)
       end
 
-      it "redirects to users#show" do
+      it "redirects to home#index" do
         post :create, params: { user: attributes_for(:user) }
-        expect(response).to redirect_to(user_path(assigns[:user]))
+        expect(response).to redirect_to(home_path)
       end
 
       it "give response created if create success" do
@@ -101,9 +89,9 @@ RSpec.describe UsersController do
   end
 
   describe 'PATCH #update' do
-    before :each do
-      @user = create(:user)
-    end
+    # before :each do
+    #   @user = create(:user)
+    # end
 
     context "with valid attributes" do
       it "locates the requested @user" do
@@ -138,11 +126,11 @@ RSpec.describe UsersController do
       end
     end
   end
-  
+
   describe 'DELETE #destroy' do
-    before :each do
-      @user = create(:user)
-    end
+    # before :each do
+    #   @user = create(:user)
+    # end
 
     it "deletes the user from the database" do
       expect{
@@ -153,7 +141,7 @@ RSpec.describe UsersController do
 
     it "redirects to users#index" do
       delete :destroy, params: { id: @user }
-      expect(response).to redirect_to users_url
+      expect(response).to redirect_to home_path
     end
   end
 
