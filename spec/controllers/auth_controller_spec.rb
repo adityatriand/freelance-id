@@ -10,10 +10,26 @@ RSpec.describe AuthController do
                 email = 'tes@gmail.com'
                 password = '12345678'
                 post :login, params: {email: email, password: password}
+                expect(response).to have_http_status(:found)
+            end
+
+            it '[JSON] get success when email and password right' do
+                request.accept = "application/json"
+                email = 'tes@gmail.com'
+                password = '12345678'
+                post :login, params: {email: email, password: password}
                 expect(response).to have_http_status(:ok)
             end
 
             it 'get fail when password not right' do
+                email = 'tes@gmail.com'
+                password = '123456789'
+                post :login, params: {email: email, password: password}
+                expect(response).to have_http_status(:found)
+            end
+
+            it '[JSON] get fail when password not right' do
+                request.accept = "application/json"
                 email = 'tes@gmail.com'
                 password = '123456789'
                 post :login, params: {email: email, password: password}
@@ -23,6 +39,14 @@ RSpec.describe AuthController do
 
         context 'with invalid user' do
             it 'unknown if use email not registered yet' do
+                email = 'tes1@gmail.com'
+                password = '123456789'
+                post :login, params: {email: email, password: password}
+                expect(response).to have_http_status(:found)
+            end
+
+            it '[JSON]  unknown if use email not registered yet' do
+                request.accept = "application/json"
                 email = 'tes1@gmail.com'
                 password = '123456789'
                 post :login, params: {email: email, password: password}
@@ -43,6 +67,12 @@ RSpec.describe AuthController do
             end
         end
         it 'will set session user_id nill' do
+            delete :logout, params: {id: session[:user_id]}
+            expect(response).to have_http_status(:found)
+        end
+
+        it '[JSON] will set session user_id nill' do
+            request.accept = "application/json"
             delete :logout, params: {id: session[:user_id]}
             expect(response).to have_http_status(:ok)
         end

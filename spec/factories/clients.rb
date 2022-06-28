@@ -14,4 +14,5 @@ FactoryBot.define do
     type_industry { nil }
     user { nil }
   end
+
 end
