@@ -54,11 +54,24 @@
           <h5 class="text-button mb-sm-5">Your Job Offering</h5>
           <img src="<%= image_url('client.png') %>" alt="portofolio" width="120">
           <p class="mt-sm-4 mb-sm-3">This is a collection of your job offer that can attract freelancer to work with you</p>
-          <a class="text-button" href="javascrpt:void(0)">Click Here</a>
+          <%= link_to "Click Here", "javascript:void(0)", {class: 'text-button', "data-bs-toggle": "modal", "data-bs-target": "#exampleModal"} %>
         </div>
       </div>
     </div>
   </article>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-warning">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Warning !</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          This feature is not yet available. Please use other features
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 <footer>
   <div class="container">
