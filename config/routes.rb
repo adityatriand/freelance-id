@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   match '/users' => "application#not_found", via: :get
   
   get '/' => "home#index", as: 'home'
+  get '/freelancer/rating' => 'feedbacks#rating'
+
 
   get '/register' => "users#new", as: 'register'
   post '/register'  => "users#create"

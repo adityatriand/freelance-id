@@ -8,4 +8,8 @@ class Feedback < ApplicationRecord
   validates :testimoni, presence: true, length: { minimum: 20 }
   validates :rating, presence: true, numericality: { only_integer: true, in: 1..10 }
 
+  def self.count_rating(id)
+    where(freelancer_id: id).average("rating")
+  end
+
 end
