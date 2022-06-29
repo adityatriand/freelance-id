@@ -1,0 +1,51 @@
+<div class="mt-5 mb-5">
+  <%= form_with(model: portofolio) do |form| %>
+    <% if portofolio.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(portofolio.errors.count, "error") %> prohibited this portofolio from being saved:</h2>
+        <ul>
+          <% portofolio.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="mb-3">
+      <%= form.label :title, {class: "form-label"} %>
+      <%= form.text_field :title, {class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :description, {class: "form-label"} %>
+      <%= form.text_area :description, {class: "form-control", size: "60x10"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :type_project, {class: "form-label"} %>
+      <%= form.select(:type_project, [
+        ['Choose your type project',nil],
+        ['Personal Project','personal'],
+        ['Client Project','client'],
+      ], {selected: portofolio.type_project}, {class: "form-control"}) %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :client_name,'Client Name*', {class: "form-label"} %>
+      <%= form.text_field :client_name, {class: "form-control",  "aria-describedby": "clientNameHelp"} %>
+      <div id="clientNameHelp" class="form-text" style="color:red;">*when you choose client as type project, this field must be filled</div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :client_industry,'Client Industry*', {class: "form-label"} %>
+      <%= form.text_field :client_industry, {class: "form-control", "aria-describedby": "clientIndustryHelp"} %>
+      <div id="clientIndustryHelp" class="form-text" style="color:red;">*when you choose client as type project, this field must be filled</div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :link_url, {class: "form-label"} %>
+      <%= form.text_field :link_url, {class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :porto_attachment,'Attachment', {class: "form-label"} %>
+      <%= form.file_field :porto_attachment, {class: "form-control"} %>
+    </div>
+    <div class="mt-5">
+      <%= form.submit class: 'btn btn-custom' %>
+    </div>
+  <% end %>
+</div>
