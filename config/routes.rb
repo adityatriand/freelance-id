@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :portofolios
   resources :freelancers, only: [:index, :new, :create, :show, :edit, :update]
   resources :clients, only: [:index, :new, :create, :show, :edit, :update]
   resources :users, only: [:show, :edit, :update, :destroy]

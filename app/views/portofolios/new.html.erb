@@ -1,0 +1,8 @@
+<% content_for :title, "New Portofolio" %>
+<div class="container mt-5 mb-5">
+  <h1 class="title-cus">Add New Portofolio</h1>
+  <%= render "form", portofolio: @portofolio %>
+  <div>
+    <%= link_to "Back to portofolios", portofolios_path %>
+  </div>
+</div>
