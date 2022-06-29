@@ -1,0 +1,26 @@
+<div id="<%= dom_id feedback %>">
+  <h5 class="card-title mb-3"><%= feedback.project_name %></h5>
+  <hr>
+  <div>
+    <h5 class="card-label">Description</h5>
+    <p class="card-text"><%= feedback.description %></p>
+  </div>
+  <div>
+    <h5 class="card-label">Url Project</h5>
+    <p class="card-text"> <%= link_to "Visit Page", feedback.link_project, {class: 'card-link'} %>
+    </p>
+  </div>
+  <div>
+    <h5 class="card-label">Freelancer Name</h5>
+    <% name =  Freelancer.where(id: feedback.freelancer_id).pluck(:name).first %>
+    <p class="card-text"><%= name %></p>
+  </div>
+  <div>
+    <h5 class="card-label">Testimoni</h5>
+    <p class="card-text"><%= feedback.testimoni %></p>
+  </div>
+  <div>
+    <h5 class="card-label">Rating</h5>
+    <p class="card-text"><%= feedback.rating %> of 10</p>
+  </div>
+</div>

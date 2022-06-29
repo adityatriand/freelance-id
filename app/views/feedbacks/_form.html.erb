@@ -1,0 +1,51 @@
+<div class="mt-5 mb-5">
+  <%= form_with(model: feedback) do |form| %>
+    <% if feedback.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
+        <ul>
+          <% feedback.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="mb-3">
+      <%= form.label :freelancer_id, {class: "form-label"} %>
+      <% if feedback.freelancer_id.blank? %>
+        <%= form.collection_select :freelancer_id, Freelancer.order(:name), :id, :name, {prompt: true}, {class: "form-control"} %>
+      <% else %>
+        <%= form.collection_select :freelancer_id, Freelancer.order(:name), :id, :name, {selected: feedback.freelancer_id}, {class: "form-control"} %>
+      <% end %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :project_name, {class: "form-label"} %>
+      <%= form.text_field :project_name, {class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :description, {class: "form-label"} %>
+      <%= form.text_area :description, {class: "form-control", size: "60x10"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :link_project, {class: "form-label"} %>
+      <%= form.text_field :link_project, {class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :testimoni, {class: "form-label"} %>
+      <%= form.text_area :testimoni, {class: "form-control", size: "60x5"} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :rating, {class: "form-label"} %>
+      <% if !feedback.rating.blank? %>
+        <% value = feedback.rating %>
+      <% else %>
+        <% value = 1 %>
+      <% end %>
+      <%= form.range_field :rating, {class: "form-range", value: value, in: 1..10, oninput: "this.nextElementSibling.value = this.value" }  %>
+      <output><%= value %></output>
+    </div>
+    <div class="mt-5">
+      <%= form.submit class: 'btn btn-custom' %>
+    </div>
+  <% end %>
+</div>
