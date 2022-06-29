@@ -46,7 +46,7 @@
           <h5 class="text-button mb-sm-5">Your Feedback and Rating</h5>
           <img src="<%= image_url('rating.png') %>" alt="rating" width="150">
           <p class="mt-sm-3 mb-sm-3">This is a menu to see your feedback and rating while working with freelancer</p>
-          <a class="text-button" href="javascrpt:void(0)">Click Here</a>
+          <a class="text-button" href="/feedbacks?id_user=<%= session[:user_id] %>">Click Here</a>
         </div>
       </div>
       <div class="col-sm-4 text-center" data-aos="zoom-in" data-aos-duration="1000">
@@ -58,15 +58,6 @@
         </div>
       </div>
     </div>
-    <%# <div class="col-sm-6" data-aos="zoom-in" data-aos-duration="1000">
-      <div class="card-client hover-zoom-effect">
-        <p>Freelancer Name: </p>
-        <p>Job Description: </p>
-        <p>Your Feedback: </p>
-        <p>Rating: </p>
-        <a class="btn btn-secondary mt-3" href="#">See More</a>
-      </div>
-    </div> %>
   </article>
 </main>
 <footer>

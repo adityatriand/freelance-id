@@ -8,6 +8,7 @@
       <%= render freelancer %>
       <div class="d-flex mt-5">
         <%= link_to "See Portofolio", "/portofolios?id_user=#{freelancer.user_id}", {class: 'btn btn-custom me-3'} %>
+        <%= link_to "See Testimoni", "/feedbacks?id_freelancer=#{freelancer.id}", {class: 'btn btn-info'} %>
       </div>
     <% end %>
   </div>

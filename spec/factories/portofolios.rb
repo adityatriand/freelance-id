@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :portofolio do
     title { "MyString" }
-    description { "MyString" }
+    description { "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro mollitia qui tenetur facilis vero laborum. Necessitatibus minima ipsam quaerat voluptas incidunt voluptate pariatur aperiam accusamus itaque eius. Consequatur, nulla laboriosam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro mollitia qui tenetur facilis vero laborum. Necessitatibus minima ipsam quaerat voluptas incidunt voluptate pariatur aperiam accusamus itaque eius. Consequatur, nulla laboriosam!" }
     type_project { "MyString" }
     client_name { "MyString" }
     client_industry { "MyString" }
