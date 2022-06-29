@@ -3,6 +3,6 @@
   <h1 class="title-cus">Add New Portofolio</h1>
   <%= render "form", portofolio: @portofolio %>
   <div>
-    <%= link_to "Back to portofolios", portofolios_path %>
+    <%= link_to "Back to portofolios", "/portofolios?id_user=#{session[:user_id]}", {class: 'btn btn-secondary'} %>
   </div>
 </div>
