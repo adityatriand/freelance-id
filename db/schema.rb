@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_28_235637) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_29_063915) do
   create_table "clients", force: :cascade do |t|
     t.string "name"
     t.string "phone"
@@ -20,6 +20,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_235637) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_clients_on_user_id"
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.string "project_name"
+    t.string "description"
+    t.string "link_project"
+    t.string "testimoni"
+    t.integer "rating"
+    t.integer "freelancer_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freelancer_id"], name: "index_feedbacks_on_freelancer_id"
+    t.index ["user_id"], name: "index_feedbacks_on_user_id"
   end
 
   create_table "freelancers", force: :cascade do |t|
@@ -56,6 +70,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_235637) do
   end
 
   add_foreign_key "clients", "users"
+  add_foreign_key "feedbacks", "freelancers"
+  add_foreign_key "feedbacks", "users"
   add_foreign_key "freelancers", "users"
   add_foreign_key "portofolios", "users"
 end
