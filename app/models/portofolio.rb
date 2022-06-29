@@ -12,6 +12,4 @@ class Portofolio < ApplicationRecord
   def type_client?
     type_project == "client"
   end
-
-
 end
