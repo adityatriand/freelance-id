@@ -172,4 +172,40 @@ RSpec.describe FeedbacksController do
     end
   end
 
+  describe 'test Function Rating' do
+
+    it "will give page not found if params id_user blank" do
+      get :rating
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "give success when rating = 10" do
+      @feedback.rating = 10
+      get :rating, params: {id_user: @freelancer.id}
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "give success when rating = 8" do
+      @feedback.rating = 10
+      get :rating, params: {id_user: @freelancer.id}
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "give success when rating = 5" do
+      @feedback.rating = 10
+      get :rating, params: {id_user: @freelancer.id}
+      expect(response).to have_http_status(:ok)
+    end
+    it "give success when rating = 0" do
+      @feedback.rating = 10
+      get :rating, params: {id_user: @freelancer.id}
+      expect(response).to have_http_status(:ok)
+    end
+    it "[JSON] give success when rating = 10" do
+      request.accept = 'application/json'
+      get :rating, params: {id_user: @freelancer.id}
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
 end
