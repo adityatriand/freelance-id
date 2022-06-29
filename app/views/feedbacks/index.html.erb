@@ -1,0 +1,41 @@
+<% content_for :title, "Feedback" %>
+<div class="container mt-5 mb-5">
+  <p style="color: green"><%= notice %></p>
+  <h1 class="title-cus">List Feedbacks</h1>
+  <% if !session[:user_id].nil? && session[:role] == 2 %>
+    <div class="mt-4">
+      <%= link_to "New feedback", new_feedback_path, {class: 'btn btn-success me-2'} %>
+      <%= link_to "Back To Home", home_path, {class: 'btn btn-secondary'} %>
+    </div>
+  <% else %>
+    <div class="mt-4">
+      <%= link_to "List Freelancers", freelancers_path, {class: 'btn btn-secondary'} %>
+    </div>
+  <% end %>
+  <% if @feedbacks.blank? %>
+    <div class="alert alert-warning mt-5" role="alert">
+      Not have feedback yet
+    </div>
+  <% else %>
+    <div id="feedbacks">
+      <div class="row">
+        <% @feedbacks.each do |feedback| %>
+          <div class="col-sm-6 mt-5">
+            <div class="card">
+              <div class="card-header text-capitalize">
+                <% name =  Freelancer.where(id: feedback.freelancer_id).pluck(:name).first %>
+                <%= name %>'s Feedback
+              </div>
+              <div class="card-body">
+                <%= render feedback %>
+              </div>
+              <div class="card-footer text-end">
+                <%= link_to "Show this feedback", feedback,  {class: "btn btn-custom"} %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
