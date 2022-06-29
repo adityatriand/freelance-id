@@ -1,5 +1,6 @@
 class Freelancer < ApplicationRecord
   belongs_to :user
+  has_many :feedback
 
   validates :name, presence: true
   validates :phone, presence: true
