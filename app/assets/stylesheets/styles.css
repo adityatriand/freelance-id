@@ -214,3 +214,14 @@ a.card-link {
     color: var(--col1);
     font-weight: bold;
 }
+
+.rating {
+    margin: 0 auto;
+    width: 200px;
+    font-size: 70px;
+    font-weight: bold;
+    color: white;
+    border-radius: 50%;
+    height: 200px;
+    line-height: 200px;
+}

@@ -18,6 +18,25 @@ class FeedbacksController < ApplicationController
     end
   end
 
+  def rating
+    if !params[:id_user].blank?
+      check_access?(current_user.id, params[:id_user].to_i)
+      overall_rating = Feedback.count_rating(params[:id_user].to_i)
+      atr_rating = check_rating(overall_rating)
+      respond_to do |format|
+        format.html { render '/freelancers/rating', locals: {rating: overall_rating, atr_rating: atr_rating} }
+        format.json { 
+            render json:{
+                message: 'This value is overall rating from client',
+                rating: overall_rating
+            }, status: :ok 
+        }
+      end
+    else
+      not_found
+    end
+  end
+
   # GET /feedbacks/1 or /feedbacks/1.json
   def show
   end
@@ -87,5 +106,31 @@ class FeedbacksController < ApplicationController
     # Only allow a list of trusted parameters through.
     def feedback_params
       params.require(:feedback).permit(:project_name, :description, :link_project, :testimoni, :rating, :freelancer_id)
+    end
+
+    def check_rating(value)
+      atr_rating = {
+        color: nil,
+        status: nil,
+        message: nil
+      }
+      if value == 10
+        atr_rating[:color] = 'bg-success'
+        atr_rating[:status] = 'Very Good'
+        atr_rating[:message] = 'Your performance is very good. Maintain and continue to do the work of the client as well as possible'
+      elsif value > 6 && value < 10
+        atr_rating[:color] = 'bg-success'
+        atr_rating[:status] = 'Good'
+        atr_rating[:message] = 'Your performance is good. Improve or maintain it by continuing to create a portfolio and do the work of the client well'
+      elsif value > 0 && value < 6
+        atr_rating[:color] = 'bg-warning'
+        atr_rating[:status] = 'Enough'
+        atr_rating[:message] = 'your performance is quite good. Let\'s improve it again by creating a portfolio so that many clients will be interested and give a good rating'
+      else
+        atr_rating[:color] = 'bg-danger'
+        atr_rating[:status] = 'Need Improve'
+        atr_rating[:message] = 'Your performance needs to be improved. Let\'s improve it by creating a portfolio so that many clients will be interested and give a good rating'
+      end
+      return atr_rating
     end
 end

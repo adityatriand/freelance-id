@@ -1,0 +1,21 @@
+<% content_for :title, "Rating" %>
+<div class="container mt-5">
+  <div class="card mb-3">
+    <div class="row justify-content-center g-0">
+      <div class="col-md-4 m-auto text-center" >
+        <div class="rating <%= atr_rating[:color] %>">
+          <%= rating %>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title mt-5"><%= atr_rating[:status] %></h5>
+          <p class="card-text mt-5 mx-3"><%= atr_rating[:message] %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5">
+    <%= link_to "Back To Home", home_path, {class: "btn btn-custom"} %>
+  </div>
+</div>
