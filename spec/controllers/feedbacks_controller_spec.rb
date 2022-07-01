@@ -19,6 +19,19 @@ RSpec.describe FeedbacksController do
         expect(assigns(:feedbacks)).to match_array([@feedback, feedback1])
     end
 
+    it "populates an array of all feedback by user id and freelancer id" do
+        feedback1 = create(:feedback, user: @user, freelancer: @freelancer)
+        get :index, params: {id_freelancer: @freelancer.id}
+        expect(assigns(:feedbacks)).to match_array([@feedback, feedback1])
+    end    
+
+    it "populates an array of all feedback by freelancer id" do
+        feedback1 = create(:feedback, user: @user, freelancer: @freelancer)
+        session[:role] = 0
+        get :index, params: {id_freelancer: @freelancer.id}
+        expect(assigns(:feedbacks)).to match_array([@feedback, feedback1])
+    end 
+
     it "will give page not found if not throw param user id" do
         get :index
         expect(response).to have_http_status(:not_found)
@@ -168,7 +181,7 @@ RSpec.describe FeedbacksController do
 
     it "redirects to feedbacks#index" do
       delete :destroy, params: { id: @feedback }
-      expect(response).to redirect_to "/feedbacks?id_client=#{@user.id}"
+      expect(response).to redirect_to "/feedbacks?id_user=#{@user.id}"
     end
   end
 
@@ -179,28 +192,18 @@ RSpec.describe FeedbacksController do
       expect(response).to have_http_status(:not_found)
     end
 
+    it "give success when rating nil" do
+      @feedback.rating = nil
+      get :rating, params: {id_user: @freelancer.id}
+      expect(response).to have_http_status(:ok)
+    end
+
     it "give success when rating = 10" do
       @feedback.rating = 10
       get :rating, params: {id_user: @freelancer.id}
       expect(response).to have_http_status(:ok)
     end
 
-    it "give success when rating = 8" do
-      @feedback.rating = 10
-      get :rating, params: {id_user: @freelancer.id}
-      expect(response).to have_http_status(:ok)
-    end
-
-    it "give success when rating = 5" do
-      @feedback.rating = 10
-      get :rating, params: {id_user: @freelancer.id}
-      expect(response).to have_http_status(:ok)
-    end
-    it "give success when rating = 0" do
-      @feedback.rating = 10
-      get :rating, params: {id_user: @freelancer.id}
-      expect(response).to have_http_status(:ok)
-    end
     it "[JSON] give success when rating = 10" do
       request.accept = 'application/json'
       get :rating, params: {id_user: @freelancer.id}
