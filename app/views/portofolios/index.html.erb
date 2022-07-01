@@ -4,7 +4,9 @@
   <h1 class="title-cus">List Portofolio</h1>
   <% if !session[:user_id].nil? && session[:role] == 1 %>
     <div class="mt-4">
-      <%= link_to "New portofolio", new_portofolio_path, {class: 'btn btn-success me-2'} %>
+      <% if session[:user_id] == params[:id_user].to_i %>
+        <%= link_to "New portofolio", new_portofolio_path, {class: 'btn btn-success me-2'} %>
+      <% end %>
       <%= link_to "Back To Home", home_path, {class: 'btn btn-secondary'} %>
     </div>
   <% else %>
