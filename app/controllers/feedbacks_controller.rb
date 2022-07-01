@@ -12,7 +12,11 @@ class FeedbacksController < ApplicationController
       check_access?(current_user.user_id, params[:id_user].to_i)
       @feedbacks = Feedback.where(user_id: params[:id_user])
     elsif !params[:id_freelancer].blank?
-      @feedbacks = Feedback.where(freelancer_id: params[:id_freelancer])
+      if session[:role] == 2
+        @feedbacks = Feedback.where(freelancer_id: params[:id_freelancer], user_id: current_user.user_id)
+      else
+        @feedbacks = Feedback.where(freelancer_id: params[:id_freelancer])  
+      end
     else
       not_found
     end
@@ -22,6 +26,9 @@ class FeedbacksController < ApplicationController
     if !params[:id_user].blank?
       check_access?(current_user.id, params[:id_user].to_i)
       overall_rating = Feedback.count_rating(params[:id_user].to_i)
+      if overall_rating.nil?
+        overall_rating = 0
+      end
       atr_rating = check_rating(overall_rating)
       respond_to do |format|
         format.html { render '/freelancers/rating', locals: {rating: overall_rating, atr_rating: atr_rating} }
@@ -89,7 +96,7 @@ class FeedbacksController < ApplicationController
     @feedback.destroy
 
     respond_to do |format|
-      format.html { redirect_to "/feedbacks?id_client=#{session[:user_id]}", notice: "Feedback was successfully destroyed." }
+      format.html { redirect_to "/feedbacks?id_user=#{session[:user_id]}", notice: "Feedback was successfully destroyed." }
       format.json { head :no_content }
     end
   end

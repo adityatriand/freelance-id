@@ -1,11 +1,15 @@
 <% content_for :title, "Info Profile" %>
 <div class="container mt-5">
   <p style="color: green"><%= notice %></p>
-  <h2 class="title-cus mt-sm-5">Your Profile</h2>
+  <% if !session[:user_id].nil? && session[:role] == 1 && (session[:user_id] == @freelancer.user_id) %>
+    <h2 class="title-cus mt-sm-5">Your Profile</h2>
+  <% end %>
   <%= render @freelancer %>
-  <div class="d-flex mt-5">
-    <%= link_to "Back To Home", home_path, {class: "btn btn-primary me-3"} %>
-    <%= link_to "Edit Profile", edit_freelancer_path(@freelancer), {class: "btn btn-secondary me-3"} %>
-    <%= link_to "Info Account", "/users/#{current_user.user_id}", {class: "btn btn-custom"} %>
-  </div>
+  <% if !session[:user_id].nil? && session[:role] == 1 && (session[:user_id] == @freelancer.user_id) %>
+    <div class="d-flex mt-5">
+      <%= link_to "Back To Home", home_path, {class: "btn btn-primary me-3"} %>
+      <%= link_to "Edit Profile", edit_freelancer_path(@freelancer), {class: "btn btn-secondary me-3"} %>
+      <%= link_to "Info Account", "/users/#{current_user.user_id}", {class: "btn btn-custom"} %>
+    </div>
+  <% end %>
 </div>
