@@ -1,6 +1,7 @@
 # Freelance ID
 
-![Logo Freelance ID](readme/logo-freelance-id.png)
+<img src="readme/logo-freelance-id.png" height="200">
+
 
 ## Description
 
