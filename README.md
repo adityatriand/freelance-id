@@ -90,7 +90,7 @@ Basically this application is built as simple as possible and easy to use by use
 You can read the detail documentation to know more about `database schema`, `relation between entity`, `role access`, `how to use application with postman` (include there's a payload, and example request also response), `how to use application with User Interface`.
 
 - [Indonesia Documentation](https://drive.google.com/file/d/1CAuxJ6P9Ven7vPmMhaRfepGhMNQYfAkm/view?usp=sharing)
-- [English Documentation]()
+- [English Documentation](https://drive.google.com/file/d/1-ipqFXwJlQznVrwE9t_uksl7l747D9qn/view?usp=sharing)
 
 ---
 
